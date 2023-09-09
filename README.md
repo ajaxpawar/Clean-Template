@@ -17,4 +17,6 @@ This is a .NET Core project template based on the Clean Architecture pattern usi
 ## Getting Started
 
 1. Clone or download this repository.
-2. Run the application
+2. Set connection string
+3. Initiate The Migration
+4. Run the application
