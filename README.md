@@ -16,7 +16,7 @@ This project template is designed for.NET Core. Follows the principles of Clean 
 
 ## Getting Started
 
-1.. Download this repository.
+1. Download this repository.
 2. Configure your connection string.
 3. Initiate the migration process.
 4. Launch the application.
