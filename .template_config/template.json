@@ -1,0 +1,20 @@
+{
+  "$schema": "http://json.schemastore.org/template",
+  "author": "Ajay B. Pawar",
+  "classifications": [ "ASP.NET Core API" ],
+  "identity": "AspNetCore.Clean.API.Template.01",
+  "name": "ASP.NET Core Clean API Template",
+  "shortName": "core-clean-api",
+  "tags": {
+    "language": "C#",
+    "type": "solution"
+  },
+  "sourceName": "Template",
+  "symbols": {
+    "includeSnippetFolder": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "Include the 'Snippet' folder in the generated project."
+    }
+  }
+}
