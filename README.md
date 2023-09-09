@@ -1,4 +1,4 @@
-Here's the formatted version of your README:
+Certainly, I've added a point about the inclusion of Mediator implementation and CQRS pattern to your README:
 
 ---
 
@@ -12,6 +12,8 @@ This project template is designed for .NET Core and follows the principles of Cl
 - **Entity Framework Core**: Integrates with Entity Framework Core for data access, allowing the use of various databases.
 - **Swagger API Documentation**: Includes Swagger UI to facilitate API documentation.
 - **Dependency Injection**: Leverages the built-in Dependency Injection capabilities of .NET Core for dependency management.
+- **Mediator Implementation**: Implements the Mediator pattern for handling commands and queries.
+- **CQRS Pattern**: Adopts the Command Query Responsibility Segregation (CQRS) pattern for separation of concerns in application logic.
 - **Configuration Management**: Manages configuration settings through `appsettings.json` and environment variables.
 
 ## Prerequisites
@@ -26,5 +28,3 @@ This project template is designed for .NET Core and follows the principles of Cl
 4. Launch the application.
 
 --- 
-
-Feel free to customize this further to include more details or specific instructions for your project template.
