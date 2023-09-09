@@ -1,22 +1,23 @@
-# My Clean Architecture .NET Core Project Template
+# My Project Template, for Clean Architecture using.NET Core
 
-This is a .NET Core project template based on the Clean Architecture pattern using Entity Framework Core. It provides a structured and modular foundation for building robust and maintainable .NET Core applications.
+This project template is designed for.NET Core. Follows the principles of Clean Architecture incorporating Entity Framework Core. It offers an modular foundation to develop robust and maintainable.NET Core applications.
 
-## Features
+## Key Features
 
-- **Clean Architecture**: Follows the Clean Architecture principles, separating concerns into layers: API/UI, Application, Domain, and Infrastructure.
-- **Entity Framework Core**: Integrated with Entity Framework Core for data access, allowing you to use a database of your choice.
-- **Swagger API Documentation**: Includes Swagger UI for interactive API documentation.
-- **Dependency Injection**: Utilizes .NET Core's built-in Dependency Injection for managing dependencies.
-- **Configuration Management**: Configuration settings managed through `appsettings.json` and environment variables.
+ **Clean Architecture**; Adheres to the principles of Clean Architecture by organizing responsibilities into layers; API/UI, Application, Domain and Infrastructure.
+ **Entity Framework Core**; integrates with Entity Framework Core for data access enabling the use of various databases.
+ **Swagger API Documentation**; Includes Swagger UI to facilitate API documentation.
+ **Dependency Injection**; Leverages the built in Dependency Injection capabilities of.NET Core, for dependency management.
+ **Configuration Management**; Manages configuration settings through `appsettings.json` and environment variables.
 
 ## Prerequisites
 
-- .NET Core 6
+ .NET Core 6
 
 ## Getting Started
 
-1. Clone or download this repository.
-2. Set connection string
-3. Initiate The Migration
-4. Run the application
+1.. Download this repository.
+2. Configure your connection string.
+3. Initiate the migration process.
+4. Launch the application.
+
