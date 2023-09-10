@@ -1,11 +1,10 @@
 using Microsoft.EntityFrameworkCore;
-using Template.Application.Configuration.Data;
-using Template.Application.Services.Local_Services;
-using Template.Infrastructure.Persistence;
 using Template.Application;
-using Template.Infrastructure.Services.Local_Services;
-using Template.Application.Features.Movie.Usecase;
 using Template.API.Middeleware;
+using Template.Infrastructure.Extensions;
+using Template.API.Extensions;
+using Microsoft.AspNetCore.ResponseCompression;
+using Serilog;
 
 string connection_string = string.Empty;
 
@@ -16,31 +15,25 @@ builder.Configuration.AddJsonFile("appsettings.json", optional: false, reloadOnC
 
 connection_string = builder.Configuration.GetConnectionString("DefaultConnection");
 
-//add DI
+//add application DI
 builder.Services.AddApplication();
 
-//register dbcontext 
-builder.Services.AddDbContext<TemplateDbContext>(options =>
-    options.UseSqlServer(connection_string));
-builder.Services.AddScoped<IApplicationDbContext>(provider => provider.GetService<TemplateDbContext>());
-
-//Usecase Register
-builder.Services.AddScoped<IMovieUsecases, MovieUsecases>();
-
+//add context
+builder.Services.AddContextDI(connection_string);
 
 // Add services to the container.
+builder.Services
+    .AddFeatureUseCases()
+    .AddFeatureLocalServices();
 
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+
+builder.Services.AddSwaggerDI();
 
 //httpcontext register
 builder.Services.AddHttpContextAccessor();
 
-//service register 
-builder.Services.AddScoped<ICurrentUserService, CurrentUserService>();
-builder.Services.AddScoped<IDateTimeService, DateTimeService>();
 
 
 
@@ -55,9 +48,18 @@ builder.Services.AddCors(options =>
         });
 });
 
+builder.Services.AddResponseCompression(options =>
+{
+    options.EnableForHttps = true;
+    options.Providers.Add<GzipCompressionProvider>();
+});
 
+builder.Host.UseSerilog((context, configuration) =>
+    configuration.ReadFrom.Configuration(context.Configuration)
+) ;
 
 var app = builder.Build();
+
 app.UseMiddleware<ErrorHandlingMiddleware>();
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

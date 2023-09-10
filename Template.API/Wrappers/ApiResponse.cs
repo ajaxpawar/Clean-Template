@@ -1,4 +1,6 @@
-﻿namespace Template.API.Wrappers
+﻿using System.Text.Json.Serialization;
+
+namespace Template.API.Wrappers
 {
     /// <summary>
     /// API Response Structrue 
@@ -6,8 +8,11 @@
     public class ApiResponse
     {
         public object Data { get; private set; }
+
         public string ErrorMessage { get; private set; }
+
         public int StatusCode { get; private set; }
+
 
         private ApiResponse() { } 
 

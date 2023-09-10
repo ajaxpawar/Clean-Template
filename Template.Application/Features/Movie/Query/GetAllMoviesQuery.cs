@@ -6,13 +6,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Template.Application.Configuration.Data;
+using Template.Application.Features.Movie.Virtual_Models;
 using Template.Domain.Entitys;
 
 namespace Template.Application.Features.Movie.Query
 {
-    public class GetAllMoviesQuery:IRequest<List<AppMovie>>
+    public class GetAllMoviesQuery:IRequest<List<MovieModel>>
     {
-        public class GetAllMoviesQueryHandler : IRequestHandler<GetAllMoviesQuery, List<AppMovie>>
+        public class GetAllMoviesQueryHandler : IRequestHandler<GetAllMoviesQuery, List<MovieModel>>
         {
             private readonly IApplicationDbContext _context;
 
@@ -21,11 +22,12 @@ namespace Template.Application.Features.Movie.Query
                 _context = context;
             }
 
-            public async Task<List<AppMovie>> Handle(GetAllMoviesQuery request, CancellationToken cancellationToken)
+            public async Task<List<MovieModel>> Handle(GetAllMoviesQuery request, CancellationToken cancellationToken)
             {
-                List<AppMovie> appMovies= new List<AppMovie>();
-                appMovies = await _context.AppMovie.AsNoTracking().ToListAsync(cancellationToken);
-                return appMovies;
+                var appMovies = await _context.AppMovie.AsNoTracking().ToListAsync(cancellationToken);
+                var response = appMovies.Select(entity => (MovieModel)entity).ToList();
+
+                return response;
             }
         }
     }

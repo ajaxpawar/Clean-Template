@@ -4,11 +4,11 @@ using Template.Domain.Entitys;
 
 namespace Template.Application.Features.Movie.Command
 {
-    public class AddMoveCommand : IRequest<AppMovie>
+    public class AddMoveCommand : IRequest<string>
     {
         public string Name { get;set; }
         public decimal Cost { get;set; }
-        public class AddMoveCommandHandler : IRequestHandler<AddMoveCommand, AppMovie>
+        public class AddMoveCommandHandler : IRequestHandler<AddMoveCommand, string>
         {
             private readonly IApplicationDbContext _context;
 
@@ -17,12 +17,12 @@ namespace Template.Application.Features.Movie.Command
                 _context = context;
             }
 
-            public async Task<AppMovie> Handle(AddMoveCommand request, CancellationToken cancellationToken)
+            public async Task<string> Handle(AddMoveCommand request, CancellationToken cancellationToken)
             {
                 AppMovie entity = new AppMovie { Name=request.Name,Cost=request.Cost};
                 _context.AppMovie.Add(entity);
                 await _context.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
-                return entity;
+                return "Movie added Succefully";
             }
         }
     }

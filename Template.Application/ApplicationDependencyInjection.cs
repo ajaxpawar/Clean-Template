@@ -7,6 +7,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using Template.Application.Loggin;
 
 namespace Template.Application
 {
@@ -16,6 +17,7 @@ namespace Template.Application
         public static void AddApplication(this IServiceCollection services)
         {
             services.AddMediatR(Assembly.GetExecutingAssembly());
+            services.AddScoped(typeof(IPipelineBehavior<,>), typeof(LogginPipline<,>));
         }
         #endregion
     }
