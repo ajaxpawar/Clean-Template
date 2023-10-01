@@ -6,7 +6,8 @@ using Template.Application.Common.Utilities;
 using Template.Application.Features.Movie.Command;
 using Template.Application.Features.Movie.Usecase;
 using Template.Application.Features.Movie.Virtual_Models;
-using Template.Domain.Entitys;
+using HashidsNet;
+using Template.Application.Services.LocalServices;
 
 /*
  *If Yous using templates snippet in application 
@@ -26,11 +27,29 @@ namespace Template.API.Controllers
     {
         private readonly IMovieUsecases _movieUsecases;
         private readonly ILogger<MovieController> _logger;
-        public MovieController(IMovieUsecases movieUsecases, ILogger<MovieController> logger)
+        private readonly IHashingService _hasingservice;
+
+        public MovieController(IMovieUsecases movieUsecases, ILogger<MovieController> logger, IHashingService hasingservice)
         {
             _movieUsecases = movieUsecases;
             _logger = logger;
+            _hasingservice = hasingservice;
         }
+
+        [HttpGet("getdata")]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(object))]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<ActionResult<object>> GetAsync(string id)
+        {
+            int rawid = _hasingservice.Decode(id);
+            MovieModel data = await _movieUsecases.Get(rawid);
+            if (data == null)
+            {
+                throw new KeyNotFoundException("No Data Presetnt");
+            }
+            return ApiResponse.Success(data).ToResponse();
+        }
+
 
         // GET: api/<MovieController>
         [HttpGet]
@@ -39,7 +58,7 @@ namespace Template.API.Controllers
         public async Task<ActionResult<object>> Get()
         {
             List<MovieModel>? data = null;
-            data = await _movieUsecases.GetAllMovies();
+            data = await _movieUsecases.GetAll();
             if (ValidationUtils.IsNotNullAndNotEmpty(data))
             {
                 return ApiResponse.Success(data).ToResponse();
@@ -59,7 +78,7 @@ namespace Template.API.Controllers
         public async Task<ActionResult<object>> Post(AddMovieRequest request)
         {
             _logger.LogInformation($"Received Request >> Post  with Body >> {JsonConvert.SerializeObject(request)}");
-            return ApiResponse.Success(await _movieUsecases.AddMovie(new AddMoveCommand { Name = request.Title, Cost = request.Cost })).ToResponse();
+            return ApiResponse.Success(await _movieUsecases.Add(new AddMoveCommand { Name = request.Title, Cost = request.Cost })).ToResponse();
 
         }
     }

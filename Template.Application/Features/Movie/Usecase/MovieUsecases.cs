@@ -2,7 +2,6 @@
 using Template.Application.Features.Movie.Command;
 using Template.Application.Features.Movie.Query;
 using Template.Application.Features.Movie.Virtual_Models;
-using Template.Domain.Entitys;
 
 namespace Template.Application.Features.Movie.Usecase
 {
@@ -15,15 +14,21 @@ namespace Template.Application.Features.Movie.Usecase
             _mediator = mediator;
         }
 
-        public async Task<string> AddMovie(AddMoveCommand addmoviecmd)
+        public async Task<string> Add(AddMoveCommand addmoviecmd)
         {
             return await _mediator.Send(addmoviecmd);
         }
 
+        public async Task<MovieModel> Get(int id)
+        {
+            return await _mediator.Send(new GetMoviesByIdQuery{Id=id});
+        }
+
         //Create your Usecase
-        public async Task<List<MovieModel>> GetAllMovies()
+        public async Task<List<MovieModel>> GetAll()
         {
             return await _mediator.Send(new GetAllMoviesQuery());
         }
     }
+
 }

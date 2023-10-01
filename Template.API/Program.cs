@@ -5,6 +5,7 @@ using Template.Infrastructure.Extensions;
 using Template.API.Extensions;
 using Microsoft.AspNetCore.ResponseCompression;
 using Serilog;
+using HashidsNet;
 
 string connection_string = string.Empty;
 
@@ -14,6 +15,8 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Configuration.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
 
 connection_string = builder.Configuration.GetConnectionString("DefaultConnection");
+
+builder.Services.AddScoped<IHashids>(_=> new Hashids("ajax",11));
 
 //add application DI
 builder.Services.AddApplication();

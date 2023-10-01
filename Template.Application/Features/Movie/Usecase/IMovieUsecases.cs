@@ -6,7 +6,10 @@ namespace Template.Application.Features.Movie.Usecase
 {
     public interface IMovieUsecases
     {
-        Task<List<MovieModel>> GetAllMovies();
-        Task<string> AddMovie(AddMoveCommand addmoviecmd);
+        Task<List<MovieModel>> GetAll();
+
+        Task<MovieModel> Get(int id);
+
+        Task<string> Add(AddMoveCommand addmoviecmd);
     }
 }
