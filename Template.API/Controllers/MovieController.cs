@@ -41,8 +41,8 @@ namespace Template.API.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<ActionResult<object>> GetAsync(string id)
         {
-            int rawid = _hasingservice.Decode(id);
-            MovieModel data = await _movieUsecases.Get(rawid);
+            int rawid = _hasingservice.Decode(id);//decode hasids
+            MovieModel data = await _movieUsecases.Get(rawid);//use decode hashides to fetc data
             if (data == null)
             {
                 throw new KeyNotFoundException("No Data Presetnt");
