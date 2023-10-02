@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Template.Application.Configuration.Data;
 using Template.Application.Features.Movie.Virtual_Models;
 using Template.Application.Services.LocalServices;
+using Template.Domain.Entitys;
 
 namespace Template.Application.Features.Movie.Query
 {
