@@ -20,7 +20,7 @@ namespace Template.Application.Features.Movie.Usecase
             return await _mediator.Send(addmoviecmd);
         }
 
-        public async Task<MovieModel> Get(int id)
+        public async Task<MovieModel> Get(MovieId id)
         {
             return await _mediator.Send(new GetMoviesByIdQuery{Id=id});
         }

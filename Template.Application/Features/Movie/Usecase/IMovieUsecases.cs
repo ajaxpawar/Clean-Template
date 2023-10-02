@@ -8,7 +8,7 @@ namespace Template.Application.Features.Movie.Usecase
     {
         Task<List<MovieModel>> GetAll();
 
-        Task<MovieModel> Get(int id);
+        Task<MovieModel> Get(MovieId id);
 
         Task<string> Add(AddMoveCommand addmoviecmd);
     }

@@ -6,8 +6,7 @@ using Template.Application.Common.Utilities;
 using Template.Application.Features.Movie.Command;
 using Template.Application.Features.Movie.Usecase;
 using Template.Application.Features.Movie.Virtual_Models;
-using HashidsNet;
-using Template.Application.Services.LocalServices;
+using Template.Domain.Entitys;
 
 /*
  *If Yous using templates snippet in application 
@@ -27,13 +26,11 @@ namespace Template.API.Controllers
     {
         private readonly IMovieUsecases _movieUsecases;
         private readonly ILogger<MovieController> _logger;
-        private readonly IHashingService _hasingservice;
 
-        public MovieController(IMovieUsecases movieUsecases, ILogger<MovieController> logger, IHashingService hasingservice)
+        public MovieController(IMovieUsecases movieUsecases, ILogger<MovieController> logger)
         {
             _movieUsecases = movieUsecases;
             _logger = logger;
-            _hasingservice = hasingservice;
         }
 
         [HttpGet("getdata")]
@@ -41,8 +38,7 @@ namespace Template.API.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<ActionResult<object>> GetAsync(string id)
         {
-            int rawid = _hasingservice.Decode(id);//decode hasids
-            MovieModel data = await _movieUsecases.Get(rawid);//use decode hashides to fetc data
+            MovieModel data = await _movieUsecases.Get(new MovieId(Guid.Parse(id)));
             if (data == null)
             {
                 throw new KeyNotFoundException("No Data Presetnt");

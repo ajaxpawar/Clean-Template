@@ -1,8 +1,6 @@
 ﻿using Template.Application.Features.Movie.Usecase;
 using Template.Application.Services.Local_Services;
 using Template.Infrastructure.Services.Local_Services;
-using Template.Application.Services.LocalServices;
-using Template.Infrastructure.Services.LocalServices;
 
 namespace Template.API.Extensions
 {
@@ -13,7 +11,6 @@ namespace Template.API.Extensions
             //service register 
             services.AddScoped<ICurrentUserService, CurrentUserService>();
             services.AddScoped<IDateTimeService, DateTimeService>();
-            services.AddScoped<IHashingService,HashingService>();
             return services;
         }
         public static IServiceCollection AddFeatureUseCases(this IServiceCollection services)
