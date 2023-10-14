@@ -20,10 +20,10 @@ namespace Template.Application.Loggin
 
         public async Task<TResponse> Handle(TReuest request, CancellationToken cancellationToken, RequestHandlerDelegate<TResponse> next)
         {
-            _logger.LogInformation($"Starting Request >> {typeof(TReuest).Name.ToString()} >> at >> {_curentdatetime.Now.ToString()}"
+            _logger.LogInformation($"Starting Request >> {typeof(TReuest).Name.ToString()} >> at >> {_curentdatetime.DateString}"
                 );
             var result = await next();
-            _logger.LogInformation($"Finished Request >> {typeof(TReuest).Name.ToString()} >> at >> {_curentdatetime.Now.ToString()}"
+            _logger.LogInformation($"Finished Request >> {typeof(TReuest).Name.ToString()} >> at >> {_curentdatetime.DateString}"
                 );
             return result;
         }

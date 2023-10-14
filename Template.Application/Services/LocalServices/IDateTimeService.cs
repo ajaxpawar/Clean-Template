@@ -9,5 +9,6 @@ namespace Template.Application.Services.Local_Services
     public interface IDateTimeService
     {
         DateTime Now { get; }
+        string DateString { get; }
     }
 }
